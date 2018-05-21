@@ -11,12 +11,14 @@ public class JumpController : MonoBehaviour
     public bool CheckOnGround = false;
     public float vy;
     public bool adf;
+    public Transform forcefield;
+    public Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Physics.IgnoreLayerCollision(11, 12);
-
+        anim.speed = 50f;
     }
 
     void Update()
@@ -46,6 +48,25 @@ public class JumpController : MonoBehaviour
             CheckOnGround = false;
        
         }
+
+        if ( gameObject.transform.position.x > 0.83 && rb.velocity.x>0)
+        {
+            Object.Instantiate(forcefield, gameObject.transform.position + new Vector3(0.15f, 0, 0), transform.rotation);
+
+            rb.velocity = new Vector3(-3, -0.2f, 0);
+
+        }
+        if (gameObject.transform.position.x < -0.83 && rb.velocity.x < 0)
+        {
+            Object.Instantiate(forcefield, gameObject.transform.position + new Vector3(0.15f, 0, 0), transform.rotation);
+
+
+            rb.velocity = new Vector3(3, -0.2f, 0);
+
+        }
+
+    
+
     }
 
     void OnCollisionEnter2D(Collision2D other) {
