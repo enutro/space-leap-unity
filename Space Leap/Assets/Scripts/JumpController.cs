@@ -113,7 +113,7 @@ public class JumpController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.gameObject.tag == "Laser" )
+        if (other.gameObject.tag == "Laser" && rb.velocity.y <= 0)
         {
             CheckOnGround = true;
 
