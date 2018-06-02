@@ -21,7 +21,7 @@ public class Moveup : MonoBehaviour
     void Update()
     {
 
-     if (speed < 0.05)
+     if (speed < 0.05 && speed!=0)
         {
             speed = speed + 0.00005f;
         }
@@ -30,5 +30,14 @@ public class Moveup : MonoBehaviour
         
       
         transform.position = offset;
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.tag == "Player")
+        {
+            speed = 0;
+        }
     }
 }
