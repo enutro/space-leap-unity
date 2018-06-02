@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JumpController : MonoBehaviour
 {
@@ -125,6 +126,7 @@ public class JumpController : MonoBehaviour
         {
             alive = false;
             rb.velocity = new Vector3(0,0,0);
+            SceneManager.LoadScene("Menu");
         }
     }
     public void OnCollision2DExit(Collision2D other)
