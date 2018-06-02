@@ -124,6 +124,7 @@ public class JumpController : MonoBehaviour
         if (other.gameObject.tag == "Destroyer" )
         {
             alive = false;
+            rb.velocity = new Vector3(0,0,0);
         }
     }
     public void OnCollision2DExit(Collision2D other)

@@ -49,6 +49,9 @@ TagManager:
   - name: BackGround
     uniqueID: 644403489
     locked: 0
+  - name: tower
+    uniqueID: 3200949059
+    locked: 0
   - name: ForeGround
     uniqueID: 958958923
     locked: 0
