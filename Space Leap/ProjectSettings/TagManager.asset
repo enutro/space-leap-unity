@@ -55,6 +55,9 @@ TagManager:
   - name: ForeGround
     uniqueID: 958958923
     locked: 0
+  - name: destroyer
+    uniqueID: 2003481031
+    locked: 0
   - name: Player
     uniqueID: 950107447
     locked: 0
