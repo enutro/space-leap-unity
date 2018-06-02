@@ -15,7 +15,6 @@ public class JumpController : MonoBehaviour
 
     public Transform tower;
 
-
     public float yDistanceBetweenLaser;
     public float xRightLaser;
     public float xLeftLaser;
@@ -116,7 +115,7 @@ public class JumpController : MonoBehaviour
         if (other.gameObject.tag == "Laser" && rb.velocity.y <= 0)
         {
             CheckOnGround = true;
-
+            FindObjectOfType<GameManager>().EndGame();
         }
     }
     public void OnCollision2DExit(Collision2D other)

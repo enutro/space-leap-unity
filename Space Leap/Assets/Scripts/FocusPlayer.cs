@@ -6,6 +6,7 @@ public class FocusPlayer : MonoBehaviour
 
     public GameObject player;       //Public variable to store a reference to the player game object
 
+    public GameObject background;       //Public variable to store a reference to the player game object
 
     private Vector3 offset;         //Private variable to store the offset distance between the player and camera
 
@@ -19,7 +20,17 @@ public class FocusPlayer : MonoBehaviour
     // LateUpdate is called after Update each frame
     void LateUpdate()
     {
-        offset = new Vector3(0, player.transform.position.y, -1);
+
+        if (player.transform.position.y < 0.47)
+        {
+            offset = new Vector3(0,  0.79f, -1);
+
+        }
+        else
+        {
+            offset = new Vector3(0, (player.transform.position.y-0.47f) + 0.79f, -1);
+
+        }
 
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         transform.position = offset;
