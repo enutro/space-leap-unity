@@ -19,9 +19,11 @@ public class FollowUFO : MonoBehaviour
     // LateUpdate is called after Update each frame
     void LateUpdate()
     {
-        offset = new Vector3(ufo.transform.position.x, transform.position.y, 0);
+        if (Timer.gameRunning) {
+            offset = new Vector3(ufo.transform.position.x, transform.position.y, 0);
 
-        // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        transform.position = offset;
+            // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
+            transform.position = offset;
+        }
     }
 }

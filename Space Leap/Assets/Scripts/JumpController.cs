@@ -38,7 +38,7 @@ public class JumpController : MonoBehaviour
 
     void Update()
     {
-        if (alive)
+        if (alive && Timer.gameRunning)
         {
             if (Input.GetKey(KeyCode.LeftArrow) && CheckOnGround == true)
             {
