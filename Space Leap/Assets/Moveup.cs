@@ -20,16 +20,15 @@ public class Moveup : MonoBehaviour
 
     void Update()
     {
+     if (Timer.gameRunning) {
+         if (speed < 0.05 && speed!=0)
+            {
+                speed = speed + 0.00005f;
+            }
 
-     if (speed < 0.05 && speed!=0)
-        {
-            speed = speed + 0.00005f;
-        }
             offset = new Vector3(0, transform.position.y + speed, 0);
-
-        
-      
-        transform.position = offset;
+            transform.position = offset;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D other)
