@@ -7,17 +7,18 @@ public class Timer : MonoBehaviour {
 
         public int fps;
         public int counter;
-        public int startTime;
-        public Text timer;
+        public float startTime;
         public static bool gameRunning;
+    public Transform start;
 
 	// Use this for initialization
 	void Start () {
             fps = 60;
             counter = 0;
-            startTime = 3;
-            timer.text = startTime.ToString();
-            Timer.gameRunning = false;
+            startTime =3f;
+        start.gameObject.SetActive(true);
+
+        Timer.gameRunning = false;
 	}
 	
 	// Update is called once per frame
@@ -25,14 +26,23 @@ public class Timer : MonoBehaviour {
 		counter++;
                 if (counter % (fps/2) == 0) {
                     startTime--;
-                    if (startTime > 0) {
-                        timer.text = startTime.ToString();
-                    } else if (startTime == 0) {
-                        timer.text = "GO!";
-                    } else {
-                        timer.text = "";
-                        Timer.gameRunning = true;
-                    }
-                }
+                    if (startTime > 0.5) {
+                start.gameObject.SetActive(false);
+
+            }
+            else if (startTime > 0 && startTime <0.5)
+            {
+
+                start.gameObject.SetActive(true);
+
+            }
+            else if (startTime < 0)
+            {
+                Timer.gameRunning = true;
+
+                start.gameObject.SetActive(false);
+
+            }
+        }
 	}
 }

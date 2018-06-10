@@ -21,12 +21,12 @@ public class Parralex : MonoBehaviour
 
         if (player.transform.position.y < 0.47)
         {
-            offset = new Vector3(0, 5.675f , 0);
+            offset = new Vector3(0, 10.63f, 0);
 
         }
         else
         {
-            offset = new Vector3(0, (5.675f+ (player.transform.position.y- 0.47f) / 1.2f) , 0);
+            offset = new Vector3(0, (10.63f + (player.transform.position.y- 0.47f) / 1.2f) , 0);
         }
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         transform.position = offset;
