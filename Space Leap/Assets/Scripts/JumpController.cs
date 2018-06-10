@@ -85,7 +85,7 @@ public class JumpController : MonoBehaviour
                 rb.velocity = new Vector3(2.7f, 0f, 0);
             }
 
-
+            //Generate new random laser
             if (rb.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
             {
 
