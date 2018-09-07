@@ -24,25 +24,19 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		counter++;
-                if (counter % (fps/2) == 0) {
-                    startTime--;
-                    if (startTime > 0.5) {
-                start.gameObject.SetActive(false);
-
-            }
-            else if (startTime > 0 && startTime <0.5)
-            {
-
-                start.gameObject.SetActive(true);
-
-            }
-            else if (startTime < 0)
-            {
-                Timer.gameRunning = true;
-
-                start.gameObject.SetActive(false);
-
-            }
+        if (counter % (fps / 2) == 0)
+        {
+            startTime--;
         }
+
+
+        if (startTime < 0)
+        {
+            Timer.gameRunning = true;
+
+            start.gameObject.SetActive(false);
+
+        }
+        
 	}
 }
