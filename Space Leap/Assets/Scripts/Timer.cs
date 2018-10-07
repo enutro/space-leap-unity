@@ -9,14 +9,12 @@ public class Timer : MonoBehaviour {
         public int counter;
         public float startTime;
         public static bool gameRunning;
-    public Transform start;
 
 	// Use this for initialization
 	void Start () {
             fps = 60;
             counter = 0;
             startTime =3f;
-        start.gameObject.SetActive(true);
 
         Timer.gameRunning = false;
 	}
@@ -34,7 +32,6 @@ public class Timer : MonoBehaviour {
         {
             Timer.gameRunning = true;
 
-            start.gameObject.SetActive(false);
 
         }
         

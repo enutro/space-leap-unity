@@ -8,7 +8,7 @@ public class displayScore : MonoBehaviour {
 
     public static int score;
 
-    public static int highscore;
+    public  int highscore;
     public Transform player;
     public int numOfLazersHopped;
     public float yDistanceBetweenLaser;
@@ -21,12 +21,12 @@ public class displayScore : MonoBehaviour {
         text = GetComponent<TextMesh>();
         numOfLazersHopped = 0;
         score = 0;
-
         highscore = PlayerPrefs.GetInt("highscore", highscore);
     }
 
     void Update()
     {
+        currentScore = numOfLazersHopped -1;
         if (player.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
         {
             numOfLazersHopped++;
@@ -34,7 +34,6 @@ public class displayScore : MonoBehaviour {
         if (numOfLazersHopped > highscore)
         {
             highscore = numOfLazersHopped;
-            text.text = "" + numOfLazersHopped;
 
             PlayerPrefs.SetInt("highscore", highscore);
         }
@@ -65,7 +64,7 @@ public class displayScore : MonoBehaviour {
             {
                 a = (currentScore % (int)Mathf.Pow(10, numOfDigits- i) / (int)Mathf.Pow(10, numOfDigits-i-1));
             }
-            GUI.DrawTexture(new Rect(i*100, 0, 100, 100), numbers[a]);
+            GUI.DrawTexture(new Rect(i*100+(490), 100, 100, 100), numbers[a]);
         }
     }
 }
