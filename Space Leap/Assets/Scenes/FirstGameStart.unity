@@ -280,7 +280,7 @@ MonoBehaviour:
   playerRigid: {fileID: 1613996756}
   chasingLaser: {fileID: 398758927}
   rocket: {fileID: 0}
-  initialLaser: {fileID: 4367531016003558, guid: 5d8c58be3c9ac2049b2a28a4c95d6e98,
+  initialLaser: {fileID: 4370817895182666, guid: 6f71868277b4bd640a1abd870b2a8d28,
     type: 2}
   laserPosition: {x: -0.251, y: -0.47, z: 20.51}
 --- !u!4 &360134132
@@ -417,7 +417,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 398758924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.107, y: -1.578, z: 11.51}
+  m_LocalPosition: {x: -0.59, y: -1.14, z: 11.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 997463283}
@@ -451,7 +451,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16, y: -0.22}
+  m_Offset: {x: -0.16, y: -0.21}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1294,6 +1294,7 @@ MonoBehaviour:
   redlaser: {fileID: 4370817895182666, guid: 6f71868277b4bd640a1abd870b2a8d28, type: 2}
   forcefield: {fileID: 4822646610903812, guid: 91ecde519aad8224992281ce1f881b98, type: 2}
   button: {fileID: 296920095}
+  jumpPosition: 0
   CheckOnGround: 0
   highscore: 0
 --- !u!1 &1697270403

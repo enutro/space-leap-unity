@@ -24,12 +24,12 @@ public class JumpController : MonoBehaviour
     public float yStartLaser;
     public Transform laser;
     public Transform redlaser;
-
+    private bool forceFieldHit = false;
     private float XMinForceField = -0.9f;
     private float XMaxForceField = 0.9f;
     public Transform forcefield;
    public GameObject button;
-
+    public float jumpPosition;
     public bool CheckOnGround = false;
     public int highscore;
 
@@ -45,13 +45,17 @@ public class JumpController : MonoBehaviour
 
     void Update()
     {
+
         if (alive && Timer.gameRunning)
         {
             if (Input.GetKey(KeyCode.LeftArrow) && CheckOnGround == true)
             {
+                jumpPosition = rb.transform.position.x;
+
                 GetComponent<Animator>().Play("", 0, 0f);
                 GetComponent<Animator>().SetBool("isJumping", true);
                 GetComponent<Animator>().SetBool("isIdle", false);
+
                 rb.velocity = new Vector2(-jumpX, jumpY);
                 CheckOnGround = false;
                 transform.localScale = new Vector3(
@@ -61,6 +65,8 @@ public class JumpController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.RightArrow) && CheckOnGround == true)
             {
+                jumpPosition = rb.transform.position.x;
+
                 GetComponent<Animator>().Play("", 0, 0f);
 
                 GetComponent<Animator>().SetBool("isJumping", true);
@@ -83,6 +89,26 @@ public class JumpController : MonoBehaviour
 
             }
 
+            //Closer forcefields.
+            if(jumpPosition < 0 && rb.transform.position.x > 0.55f)
+            {
+                Vector3 newScale = forcefield.transform.localScale;
+                newScale.x *= -1;
+                forcefield.transform.localScale = newScale;
+                Object.Instantiate(forcefield, new Vector3(0.55f, rb.transform.position.y, 0), transform.rotation);
+                rb.velocity = new Vector3(-2f, rb.velocity.y, 0);
+                forceFieldHit = true;
+            }
+            if (jumpPosition > 0 && rb.transform.position.x < -0.55f)
+            {
+                Vector3 newScale = forcefield.transform.localScale;
+                newScale.x *= -1;
+                forcefield.transform.localScale = newScale;
+                Object.Instantiate(forcefield, new Vector3(-0.55f, rb.transform.position.y, 0), transform.rotation);
+                rb.velocity = new Vector3(2f, rb.velocity.y, 0);
+                forceFieldHit = true;
+            }
+
 
 
             //Check Left and Right forceField.
@@ -92,7 +118,9 @@ public class JumpController : MonoBehaviour
                 newScale.x *= -1;
                 forcefield.transform.localScale = newScale;
                 Object.Instantiate(forcefield, new Vector3(XMaxForceField, rb.transform.position.y, 0), transform.rotation);
-                rb.velocity = new Vector3(-1.75f, 0f, 0);
+                rb.velocity = new Vector3(-2f, 0f, 0);
+                forceFieldHit = true;
+
             }
             if (rb.transform.position.x < XMinForceField && rb.velocity.x < 0)
             {
@@ -100,11 +128,28 @@ public class JumpController : MonoBehaviour
                 newScale.x *= -1;
                 forcefield.transform.localScale = newScale;
                 Object.Instantiate(forcefield, new Vector3(XMinForceField, rb.transform.position.y, 0), transform.rotation);
-                rb.velocity = new Vector3(1.75f, 0f, 0);
+                rb.velocity = new Vector3(2f, 0f, 0);
+                forceFieldHit = true;
             }
 
-            //Generate new random laser
-            if (rb.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
+            if(forceFieldHit && rb.velocity.x < 0)
+            {
+                if (rb.transform.position.x < 0.276f)
+                {
+                    rb.velocity = new Vector3(0f, rb.velocity.y, 0);
+                }
+            }
+            else if (forceFieldHit && rb.velocity.x > 0)
+            {
+                if (rb.transform.position.x > -0.280f)
+                {
+                    rb.velocity = new Vector3(0f, rb.velocity.y, 0);
+                }
+
+            }
+
+                //Generate new random laser
+                if (rb.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
             {
 
                 numOfLazersHopped++;
@@ -162,6 +207,8 @@ public class JumpController : MonoBehaviour
             CheckOnGround = true;
             GetComponent<Animator>().SetBool("isJumping", false);
             GetComponent<Animator>().SetBool("isIdle", true);
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            forceFieldHit = false;
         }
 
         if (other.gameObject.tag == "Destroyer" )

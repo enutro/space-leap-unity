@@ -23,9 +23,19 @@ public class AIFollowPlayer : MonoBehaviour
             {
                 speed = speed + 0.000005f;
             }
+            if(player.transform.position.y < -0.45f)
+            {
+                speed = speed + 0.01f;
 
-            offset = new Vector3(player.transform.position.x-0.55f, transform.position.y + speed, 0);
+            }
+            offset = new Vector3(player.transform.position.x-0.59f, transform.position.y + speed, 0);
             transform.position = offset;
+        }
+        else
+        {
+            offset = new Vector3(player.transform.position.x - 0.59f, transform.position.y , 0);
+            transform.position = offset;
+
         }
     }
 
