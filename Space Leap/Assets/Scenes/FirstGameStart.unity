@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f937fe0a1ff20b044bd9696e92beba2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 0.01
   player: {fileID: 1613996751}
   chasing: 1
 --- !u!61 &398758929

@@ -48,6 +48,30 @@ public class JumpController : MonoBehaviour
 
         if (alive && Timer.gameRunning)
         {
+            Touch touch;
+            bool isTouch = false;
+            if (Input.touchCount > 0)
+            {
+                isTouch = true;
+                touch = Input.touches[0];
+                if (((isTouch && touch.position.x < Screen.width / 2)) && CheckOnGround == true)
+                {
+                    jumpPosition = rb.transform.position.x;
+
+                    GetComponent<Animator>().Play("", 0, 0f);
+                    GetComponent<Animator>().SetBool("isJumping", true);
+                    GetComponent<Animator>().SetBool("isIdle", false);
+
+                    rb.velocity = new Vector2(-jumpX, jumpY);
+                    CheckOnGround = false;
+                    transform.localScale = new Vector3(
+              -1,
+             transform.localScale.y,
+             transform.localScale.z);
+                }
+
+            }
+
             if (Input.GetKey(KeyCode.LeftArrow) && CheckOnGround == true)
             {
                 jumpPosition = rb.transform.position.x;
