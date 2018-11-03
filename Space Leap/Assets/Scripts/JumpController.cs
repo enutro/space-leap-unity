@@ -54,7 +54,7 @@ public class JumpController : MonoBehaviour
             {
                 isTouch = true;
                 touch = Input.touches[0];
-                if (((isTouch && touch.position.x < Screen.width / 2)) && CheckOnGround == true)
+                if (((isTouch && touch.position.x < Screen.width / 3)) && CheckOnGround == true)
                 {
                     jumpPosition = rb.transform.position.x;
 
@@ -69,6 +69,32 @@ public class JumpController : MonoBehaviour
              transform.localScale.y,
              transform.localScale.z);
                 }
+                if (((isTouch && touch.position.x > (Screen.width / 3)*2)) && CheckOnGround == true)
+                {
+                    jumpPosition = rb.transform.position.x;
+
+                    GetComponent<Animator>().Play("", 0, 0f);
+
+                    GetComponent<Animator>().SetBool("isJumping", true);
+                    GetComponent<Animator>().SetBool("isIdle", false);
+                    rb.velocity = new Vector2(jumpX, jumpY);
+                    CheckOnGround = false;
+                    transform.localScale = new Vector3(
+                   1,
+                   transform.localScale.y,
+                   transform.localScale.z);
+                }
+                if (((isTouch && touch.position.x < (Screen.width / 3) * 2)) && ((isTouch && touch.position.x > (Screen.width / 3)))  && CheckOnGround == true)
+                {
+                    GetComponent<Animator>().Play("", 0, 0f);
+
+                    GetComponent<Animator>().SetBool("isJumping", true);
+                    GetComponent<Animator>().SetBool("isIdle", false);
+                    rb.velocity = new Vector2(0, jumpY);
+                    CheckOnGround = false;
+
+                }
+
 
             }
 
@@ -183,7 +209,7 @@ public class JumpController : MonoBehaviour
                     if (randomLaserNumber == 0)
                     {
                         Vector3 newScale = laser.transform.localScale;
-                        newScale.x = -1;
+                        newScale.x = 1;
                         laser.transform.localScale = newScale;
 
 
@@ -193,7 +219,7 @@ public class JumpController : MonoBehaviour
                     else
                     {
                         Vector3 newScale = laser.transform.localScale;
-                        newScale.x = 1;
+                        newScale.x = -1;
                         laser.transform.localScale = newScale;
                         Object.Instantiate(laser, new Vector3(xRightLaser, numOfLazersHopped * yDistanceBetweenLaser + yStartLaser), transform.rotation);
 

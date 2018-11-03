@@ -36,8 +36,11 @@ public class FirstStartGameAnimation : MonoBehaviour {
                 hasJumped = true;
                 playerRigid.velocity = new Vector3(0.675f, 4f, 0f);
                 Object.Instantiate(initialLaser, laserPosition, transform.rotation);
-
-            }else if (playerRigid.velocity.y == 0)
+                Vector3 newScale = initialLaser.transform.localScale;
+                newScale.x = -1;
+                initialLaser.transform.localScale = newScale;
+            }
+            else if (playerRigid.velocity.y == 0)
             {
                 player.GetComponent<Animator>().SetBool("isIdle", true);
                 player.GetComponent<Animator>().SetBool("isJumping", false);
