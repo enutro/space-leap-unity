@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class displayScore : MonoBehaviour {
     public Texture2D[] numbers;
-    public int currentScore=123;
+    public int currentScore=0;
 
     public static int score;
 
@@ -13,9 +13,11 @@ public class displayScore : MonoBehaviour {
     public int numOfLazersHopped;
     public float yDistanceBetweenLaser;
     public float yStartLaser;
-
+    public int offset = 20;
     TextMesh text;
-
+    public float ypos;
+    public bool isHighScore = false;
+    public float hideOffset = 1000;
     void Start()
     {
         text = GetComponent<TextMesh>();
@@ -26,16 +28,51 @@ public class displayScore : MonoBehaviour {
 
     void Update()
     {
+        hideOffset = this.transform.position.x;
         currentScore = numOfLazersHopped -1;
         if (player.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
         {
             numOfLazersHopped++;
         }
-        if (numOfLazersHopped > highscore)
+        if (currentScore > highscore)
         {
-            highscore = numOfLazersHopped;
-
+            highscore = currentScore;
             PlayerPrefs.SetInt("highscore", highscore);
+        }
+
+        if (isHighScore)
+        {
+            if (highscore < 10)
+            {
+                offset = 0;
+            }
+            else if (highscore >= 10 && highscore < 100)
+            {
+                offset = 100;
+
+            }
+            else
+            {
+                offset = 200;
+
+            }
+        }
+        else
+        {
+            if (currentScore < 10)
+            {
+                offset = 0;
+            }
+            else if (currentScore >= 10 && currentScore < 100)
+            {
+                offset = 45;
+
+            }
+            else
+            {
+                offset = 90;
+
+            }
         }
     }
 
@@ -50,21 +87,55 @@ public class displayScore : MonoBehaviour {
     }
     // Update is called once per frame
     void OnGUI() {
-        int numOfDigits = currentScore.ToString().Length;
-        for (int i= 0;i< numOfDigits; i++)
+        if (currentScore > highscore)
         {
-            int a;
-            if (i == 0)
+            highscore = currentScore;
+            PlayerPrefs.SetInt("highscore", highscore);
+        }
+        if (isHighScore)
+        {
+            int numOfDigits = highscore.ToString().Length;
+            for (int i = 0; i < numOfDigits; i++)
             {
-              a = (currentScore / (int)Mathf.Pow(10, numOfDigits-1));
+                int a;
+                if (i == 0)
+                {
+                    a = (highscore / (int)Mathf.Pow(10, numOfDigits - 1));
 
 
+                }
+                else
+                {
+                    a = (highscore % (int)Mathf.Pow(10, numOfDigits - i) / (int)Mathf.Pow(10, numOfDigits - i - 1));
+                }
+                if (a < numbers.Length - 1 && a >= 0)
+                {
+                    GUI.DrawTexture(new Rect(i * 170 + (490) - offset + hideOffset, ypos, 150, 150), numbers[a]);
+                }
             }
-            else
+
+        }
+        else
+        {
+            int numOfDigits = currentScore.ToString().Length;
+            for (int i = 0; i < numOfDigits; i++)
             {
-                a = (currentScore % (int)Mathf.Pow(10, numOfDigits- i) / (int)Mathf.Pow(10, numOfDigits-i-1));
+                int a;
+                if (i == 0)
+                {
+                    a = (currentScore / (int)Mathf.Pow(10, numOfDigits - 1));
+
+
+                }
+                else
+                {
+                    a = (currentScore % (int)Mathf.Pow(10, numOfDigits - i) / (int)Mathf.Pow(10, numOfDigits - i - 1));
+                }
+                if (a < numbers.Length - 1 && a >= 0)
+                {
+                    GUI.DrawTexture(new Rect(i * 100 + (490) - offset, ypos, 100, 100), numbers[a]);
+                }
             }
-            GUI.DrawTexture(new Rect(i*100+(490), 100, 100, 100), numbers[a]);
         }
     }
 }

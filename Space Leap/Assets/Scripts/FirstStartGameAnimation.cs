@@ -13,7 +13,6 @@ public class FirstStartGameAnimation : MonoBehaviour {
     public Transform rocket;
     public Transform initialLaser;
     public Vector3 laserPosition;
-
     // Use this for initialization
     void Start () {
 		
@@ -35,10 +34,10 @@ public class FirstStartGameAnimation : MonoBehaviour {
                 player.GetComponent<Animator>().SetBool("isJumping", true);
                 hasJumped = true;
                 playerRigid.velocity = new Vector3(0.675f, 4f, 0f);
-                Object.Instantiate(initialLaser, laserPosition, transform.rotation);
-                Vector3 newScale = initialLaser.transform.localScale;
-                newScale.x = -1;
+                Vector3 newScale = new Vector3(-1f, 1f, 1f);
                 initialLaser.transform.localScale = newScale;
+                Object.Instantiate(initialLaser, laserPosition, transform.rotation);
+
             }
             else if (playerRigid.velocity.y == 0)
             {

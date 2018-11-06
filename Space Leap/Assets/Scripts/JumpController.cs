@@ -29,10 +29,15 @@ public class JumpController : MonoBehaviour
     private float XMaxForceField = 0.9f;
     public Transform forcefield;
    public GameObject button;
+    public GameObject hstext;
+    public GameObject hsnum;
+
+
     public float jumpPosition;
     public bool CheckOnGround = false;
     public int highscore;
-
+    AudioSource audioData;
+    public bool moveHasBeenMade = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,13 +45,20 @@ public class JumpController : MonoBehaviour
 
         highscore = PlayerPrefs.GetInt("highscore", highscore);
         button.SetActive(false);
+        hstext.SetActive(false);
+        hsnum.SetActive(true);
+        hsnum.transform.position = new Vector3(1000f,0f,0f);
+        audioData = GetComponent<AudioSource>();
 
     }
 
     void Update()
     {
-
-        if (alive && Timer.gameRunning)
+        if(Input.touchCount > 0 || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow))
+        {
+            moveHasBeenMade = true;
+        }
+        if (alive && Timer.gameRunning )
         {
             Touch touch;
             bool isTouch = false;
@@ -226,7 +238,7 @@ public class JumpController : MonoBehaviour
                     }
                 }
                 else {
-                    if (randomLaserNumber == 0)
+                    if (randomLaserNumber==1)
                     {
                         Vector3 newScale = redlaser.transform.localScale;
                         newScale.x = -1;
@@ -251,6 +263,7 @@ public class JumpController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
+    
 
         if (other.gameObject.tag == "Laser" && rb.velocity.y <= 0)
         {
@@ -263,12 +276,15 @@ public class JumpController : MonoBehaviour
 
         if (other.gameObject.tag == "Destroyer" )
         {
+            audioData.Play(0);
             alive = false;
             rb.velocity = new Vector3(0,0,0);
             GetComponent<Animator>().SetBool("isJumping", false);
             GetComponent<Animator>().SetBool("isIdle", false);
             GetComponent<Animator>().SetBool("isDying", true);
             button.SetActive(true);
+            hstext.SetActive(true);
+            hsnum.transform.position = new Vector3(4f, 0f, 0f);
 
         }
     }

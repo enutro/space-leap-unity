@@ -21,17 +21,18 @@ public class ExtendoToweroonie : MonoBehaviour
     }
     void Update()
     {
-
-        AnimatorStateInfo animationState = initialTower.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-        float myTime = animationState.normalizedTime;
-
-        if (myTime > maxTime && maxTime != 5)
+        if (numOfTowers <= 3)
         {
-            maxTime++;
-            Object.Instantiate(tower, new Vector3(0, -0.49f + (numOfTowers * distanceBetweenTower), 20), transform.rotation);
-            numOfTowers++;
+            AnimatorStateInfo animationState = initialTower.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+            float myTime = animationState.normalizedTime;
+
+            if (myTime > maxTime && maxTime != 5)
+            {
+                maxTime++;
+                Object.Instantiate(tower, new Vector3(0, -0.49f + (numOfTowers * distanceBetweenTower), 20), transform.rotation);
+                numOfTowers++;
+            }
         }
-       
             if (player.position.y > (numOfTowers * distanceBetweenTower) - (distanceBetweenTower * 3) && maxTime>=5)
             {
                 Object.Instantiate(tower, new Vector3(0, -0.49f + (numOfTowers * distanceBetweenTower), 20), transform.rotation);

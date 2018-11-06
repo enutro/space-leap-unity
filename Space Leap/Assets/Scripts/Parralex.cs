@@ -18,7 +18,14 @@ public class Parralex : MonoBehaviour
 
     void Update()
     {
+        if(player.transform.position.y >= 538.895)
+        {
+            offset = new Vector3(0, (player.transform.position.y-(538.895f - 470.7f)), 0);
+            transform.position = offset;
 
+
+        }
+        else { 
         if (player.transform.position.y < 0.47)
         {
             offset = new Vector3(0, 22.2f, 0);
@@ -30,5 +37,6 @@ public class Parralex : MonoBehaviour
         }
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         transform.position = offset;
+            }
     }
 }
