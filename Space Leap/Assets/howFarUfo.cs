@@ -11,6 +11,7 @@ public class howFarUfo : MonoBehaviour
     public Transform player;
     public Transform ufo;
     public int howFar;
+    public Camera cam;
 
     TextMesh text;
     public float ypos;
@@ -60,7 +61,10 @@ public class howFarUfo : MonoBehaviour
                 }
                 if (a < numbers.Length  && a >= 0)
                 {
-                    GUI.DrawTexture(new Rect(i * 60+ 760+(ufo.transform.position.x*420)- offset, 1750, 50, 50), numbers[a]);
+                Vector3 screenPos = cam.WorldToScreenPoint(ufo.transform.position);
+
+
+                GUI.DrawTexture(new Rect(i * ((Screen.width / 15.5f)) + screenPos.x + (Screen.width / 5.5f), Screen.height/1.11f, ((Screen.width / 16)), ((Screen.width / 16))), numbers[a]);
                 }
             }
 

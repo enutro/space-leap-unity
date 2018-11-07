@@ -509,6 +509,7 @@ MonoBehaviour:
   player: {fileID: 1613996754}
   ufo: {fileID: 398758927}
   howFar: 0
+  cam: {fileID: 2126756128}
   ypos: 0
   hideOffset: 1000
 --- !u!1 &360134130
@@ -1606,7 +1607,7 @@ MonoBehaviour:
   offset: 20
   ypos: 500
   isHighScore: 1
-  hideOffset: 1000
+  hideOffset: 200
 --- !u!1 &1607525854
 GameObject:
   m_ObjectHideFlags: 0

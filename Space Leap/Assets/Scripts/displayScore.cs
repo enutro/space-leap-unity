@@ -17,7 +17,7 @@ public class displayScore : MonoBehaviour {
     TextMesh text;
     public float ypos;
     public bool isHighScore = false;
-    public float hideOffset = 1000;
+    public float hideOffset = 3000;
     void Start()
     {
         text = GetComponent<TextMesh>();
@@ -110,7 +110,7 @@ public class displayScore : MonoBehaviour {
                 }
                 if (a < numbers.Length - 1 && a >= 0)
                 {
-                    GUI.DrawTexture(new Rect(i * 170 + (490) - offset + hideOffset, ypos, 150, 150), numbers[a]);
+                    GUI.DrawTexture(new Rect(i * ((Screen.width / 10)) + (Screen.width / 2) + (Screen.width / 12) + hideOffset, (Screen.height / 4), (Screen.width / 10), (Screen.width / 10)), numbers[a]);
                 }
             }
 
@@ -133,7 +133,7 @@ public class displayScore : MonoBehaviour {
                 }
                 if (a < numbers.Length - 1 && a >= 0)
                 {
-                    GUI.DrawTexture(new Rect(i * 100 + (490) - offset, ypos, 100, 100), numbers[a]);
+                    GUI.DrawTexture(new Rect(i * ((Screen.width / 11)) + (Screen.width / 2)+(Screen.width / 12), (Screen.height / 16), (Screen.width / 12), (Screen.width / 12)), numbers[a]);
                 }
             }
         }

@@ -47,7 +47,7 @@ public class JumpController : MonoBehaviour
         button.SetActive(false);
         hstext.SetActive(false);
         hsnum.SetActive(true);
-        hsnum.transform.position = new Vector3(1000f,0f,0f);
+        hsnum.transform.position = new Vector3(5000f,0f,0f);
         audioData = GetComponent<AudioSource>();
 
     }
@@ -284,7 +284,7 @@ public class JumpController : MonoBehaviour
             GetComponent<Animator>().SetBool("isDying", true);
             button.SetActive(true);
             hstext.SetActive(true);
-            hsnum.transform.position = new Vector3(4f, 0f, 0f);
+            hsnum.transform.position = new Vector3(0f, 0f, 0f);
 
         }
     }
