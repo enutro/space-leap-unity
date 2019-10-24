@@ -8,22 +8,62 @@ public class AIFollowPlayer : MonoBehaviour
 
     public float speed;
     public GameObject player;
-
+    public bool chasing=true;
+    private Vector3 offset;         //Private variable to store the offset distance between the player and camera
+    public bool moveHasBeenMade = false;
+    public GameObject ufoIndicator;
     void start() {
-        speed = 0.5f;
+        ufoIndicator.SetActive(false);
     }
 
     void Update()
     {
-        if (Timer.gameRunning) {
-            Vector3 localPosition = player.transform.position+new Vector3(-0.25f,0,0) - transform.position;
-            localPosition = localPosition.normalized; // The normalized direction in LOCAL space
-            transform.Translate(localPosition.x * Time.deltaTime * speed, localPosition.y * Time.deltaTime * speed, localPosition.z * Time.deltaTime * speed);
-            float maxSpeed = 2.15f;
-            if (speed < maxSpeed)
-            {
-                speed = speed + 0.0025f;
-            }
+        if (Input.touchCount > 0 || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow))
+        {
+            moveHasBeenMade = true;
+
         }
+
+        if (Timer.gameRunning && chasing && moveHasBeenMade)
+        {//2.62 is max
+            if (speed < 0.023)
+            {
+                speed = speed + 0.000001f;
+            }
+            if(player.transform.position.y < -0.45f)
+            {
+                speed = speed + 0.01f;
+
+            }
+            offset = new Vector3(player.transform.position.x-0.59f, transform.position.y + speed, 0);
+            transform.position = offset;
+        }
+        else
+        {
+            offset = new Vector3(player.transform.position.x - 0.59f, transform.position.y , 0);
+            transform.position = offset;
+
+        }
+
+        if (transform.position.y < player.transform.position.y-2.1f)
+        {
+            ufoIndicator.SetActive(true);
+
+        }
+        else
+        {
+            ufoIndicator.SetActive(false);
+
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.tag == "Player")
+        {
+            chasing = false;
+        }
+
     }
 }

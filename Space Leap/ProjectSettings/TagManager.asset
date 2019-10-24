@@ -9,6 +9,7 @@ TagManager:
   - ForceField
   - Destroyer
   - Chaser
+  - Button
   layers:
   - Default
   - TransparentFX
