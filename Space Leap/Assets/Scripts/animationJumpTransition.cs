@@ -77,14 +77,12 @@ public class animationJumpTransition : MonoBehaviour {
         {
 
             CheckOnGround = true;
-            FindObjectOfType<GameManager>().EndGame();
 
         }
         if (other.gameObject.tag == "Destroyer")
         {
             alive = false;
             rb.velocity = new Vector3(5, 0, 0);
-            SceneManager.LoadScene("Menu");
         }
 
     }
