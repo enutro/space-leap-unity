@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class displayScore : MonoBehaviour {
+public class displayScore : MonoBehaviour
+{
     public Texture2D[] numbers;
-    public int currentScore=0;
+    public int currentScore = 0;
 
     public static int score;
 
-    public  int highscore;
+    public int highscore;
     public Transform player;
     public int numOfLazersHopped;
     public float yDistanceBetweenLaser;
@@ -29,7 +30,7 @@ public class displayScore : MonoBehaviour {
     void Update()
     {
         hideOffset = this.transform.position.x;
-        currentScore = numOfLazersHopped -1;
+        currentScore = numOfLazersHopped - 1;
         if (player.transform.position.y > (numOfLazersHopped * yDistanceBetweenLaser) + yStartLaser)
         {
             numOfLazersHopped++;
@@ -86,7 +87,8 @@ public class displayScore : MonoBehaviour {
         score = 0;
     }
     // Update is called once per frame
-    void OnGUI() {
+    void OnGUI()
+    {
         if (currentScore > highscore)
         {
             highscore = currentScore;
@@ -133,7 +135,7 @@ public class displayScore : MonoBehaviour {
                 }
                 if (a < numbers.Length - 1 && a >= 0)
                 {
-                    GUI.DrawTexture(new Rect(i * ((Screen.width / 11)) + (Screen.width / 2)+(Screen.width / 12), (Screen.height / 16), (Screen.width / 12), (Screen.width / 12)), numbers[a]);
+                    GUI.DrawTexture(new Rect(i * ((Screen.width / 11)) + (Screen.width / 2) + (Screen.width / 4), (Screen.height / 16), (Screen.width / 12), (Screen.width / 12)), numbers[a]);
                 }
             }
         }

@@ -283,6 +283,7 @@ public class JumpController : MonoBehaviour
             GetComponent<Animator>().SetBool("isIdle", false);
             GetComponent<Animator>().SetBool("isDying", true);
             button.SetActive(true);
+            button.GetComponent<RectTransform>().sizeDelta= new Vector2(Screen.width / 1.3f, Screen.height / 8);
             hstext.SetActive(true);
             hsnum.transform.position = new Vector3(0f, 0f, 0f);
 
