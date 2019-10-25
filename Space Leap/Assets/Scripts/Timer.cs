@@ -2,25 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
 public class Timer : MonoBehaviour {
 
         public int fps;
         public int counter;
         public float startTime;
     public float fadeTime;
-    public static int showAd = 0 ;
-    public int deathsPerAd=3;
     public static bool gameRunning;
         public GameObject instruction;
 	// Use this for initialization
 	void Start () {
-        showAd++;
-        if (showAd % deathsPerAd == 0)
-        {
-            Advertisement.Show();
-        }
-
         fps = 60;
             counter = 0;
             startTime =3f;
